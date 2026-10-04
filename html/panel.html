@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rotor — Local Cipher Workbench</title>
+  <link rel="stylesheet" href="../css/panel.css">
+  <link rel="icon" type="image/png" href="../icons/icon48.png">
+</head>
+<body>
+  <div class="app-container">
+    <header class="top">
+      <div class="brand" aria-label="Rotor">
+        <span class="glyph" aria-hidden="true"><i></i><i></i><i class="on"></i><i></i><i></i></span>
+        <div class="brand-text">
+          <span class="word">ROTOR</span>
+          <span class="brand-sub">CIPHER BENCH</span>
+        </div>
+      </div>
+      <div class="top-actions">
+        <button type="button" id="theme" class="icon-btn" title="Toggle Theme" aria-label="Toggle theme">☀</button>
+      </div>
+    </header>
+
+    <div class="search-wrap">
+      <input id="search" type="search" placeholder="Search algorithms (e.g. aes, sha, base64, enigma)..." autocomplete="off" spellcheck="false">
+    </div>
+
+    <nav class="groups" id="groups" aria-label="Algorithm groups"></nav>
+    <div class="chips" id="chips" role="listbox" aria-label="Algorithms"></div>
+
+    <section class="algo-meta" id="algo-meta">
+      <div class="algo-row">
+        <h1 id="algo-name">Base64</h1>
+        <span class="warn" id="warn" hidden></span>
+      </div>
+      <p class="hint" id="hint"></p>
+    </section>
+
+    <div class="modes" id="modes" role="tablist" aria-label="Mode"></div>
+    <div class="fields" id="fields"></div>
+
+    <section class="tape-block">
+      <div class="tape-head">
+        <span id="in-label" class="tape-tag">INPUT TAPE</span>
+        <span class="tape-actions">
+          <label class="file-btn" title="Load file into input tape">DROP FILE<input id="file" type="file" hidden></label>
+        </span>
+      </div>
+      <textarea id="input" class="tape" placeholder="Type, paste, or drop a file..." spellcheck="false"></textarea>
+    </section>
+
+    <div class="mid">
+      <button type="button" id="swap" class="ghost" title="Swap input and output">⇅ SWAP</button>
+      <button type="button" id="run" class="primary" hidden>RUN</button>
+    </div>
+
+    <section class="tape-block">
+      <div class="tape-head">
+        <span class="tape-tag">OUTPUT TAPE</span>
+        <button type="button" id="copy" class="ghost" title="Copy output to clipboard">COPY</button>
+      </div>
+      <textarea id="output" class="tape" readonly placeholder="Output appears here..." spellcheck="false"></textarea>
+    </section>
+
+    <p class="meta" id="meta"></p>
+    <p class="err" id="err" hidden></p>
+
+    <details class="selftest" id="selftest-box">
+      <summary>DIAGNOSTICS &amp; SELF-TEST <span id="selftest-count">…</span></summary>
+      <ol id="selftest-list"></ol>
+    </details>
+
+    <footer class="branding-footer">
+      <div class="dev-badge">
+        <span class="dev-dot"></span>
+        <span class="dev-name">Strrechpixal Developers</span>
+        <span class="dev-sep">—</span>
+        <span class="dev-year">2026</span>
+      </div>
+      <div class="badge-sub">HIGH-ASSURANCE CRYPTO ENGINE · ZERO TELEMETRY</div>
+    </footer>
+  </div>
+
+  <script type="module" src="../js/panel.js"></script>
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Rotor Asset Generator</title>
+  <style>
+    body { background: #0b0e14; color: #f0f6fc; font-family: sans-serif; padding: 20px; }
+    canvas { border: 1px solid #2a3241; margin-bottom: 20px; background: #12161f; }
+    .container { display: flex; flex-direction: column; align-items: flex-start; }
+    h1 { color: #d4af37; }
+    button { background: #d4af37; border: none; padding: 10px 20px; color: #000; font-weight: bold; cursor: pointer; border-radius: 4px; margin-bottom: 20px; }
+  </style>
+</head>
+<body>
+  <h1>Rotor Web Store Asset Generator</h1>
+  <p>Click the button below to generate and download the required PNG assets for the Chrome Web Store.</p>
+  <button onclick="downloadAll()">Download All Assets</button>
+
+  <div class="container">
+    <h3>Store Icon (128x128)</h3>
+    <canvas id="icon" width="128" height="128"></canvas>
+
+    <h3>Small Promotion Tile (440x280)</h3>
+    <canvas id="smallTile" width="440" height="280"></canvas>
+
+    <h3>Marquee Propaganda Tile (1400x560)</h3>
+    <canvas id="marqueeTile" width="1400" height="560"></canvas>
+  </div>
+
+  <script>
+    const COLORS = {
+      bg: '#0b0e14',
+      card: '#12161f',
+      brass: '#d4af37',
+      text: '#f0f6fc',
+      cyberBlue: '#0284c7',
+      grid: 'rgba(212, 175, 55, 0.12)'
+    };
+
+    function drawGrid(ctx, width, height) {
+      ctx.fillStyle = COLORS.bg;
+      ctx.fillRect(0, 0, width, height);
+
+      // Grid
+      ctx.strokeStyle = COLORS.grid;
+      ctx.lineWidth = 1;
+      for (let x = 0; x <= width; x += 36) {
+        ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, height); ctx.stroke();
+      }
+      for (let y = 0; y <= height; y += 36) {
+        ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(width, y); ctx.stroke();
+      }
+    }
+
+    function drawIcon() {
+      const canvas = document.getElementById('icon');
+      const ctx = canvas.getContext('2d');
+      drawGrid(ctx, 128, 128);
+
+      // Center Lock/Crypto Symbol
+      ctx.fillStyle = COLORS.brass;
+      ctx.beginPath();
+      ctx.arc(64, 50, 20, Math.PI, 0);
+      ctx.lineWidth = 6;
+      ctx.strokeStyle = COLORS.brass;
+      ctx.stroke();
+
+      ctx.fillRect(40, 50, 48, 40);
+      ctx.fillStyle = COLORS.bg;
+      ctx.beginPath();
+      ctx.arc(64, 70, 8, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    function drawSmallTile() {
+      const canvas = document.getElementById('smallTile');
+      const ctx = canvas.getContext('2d');
+      drawGrid(ctx, 440, 280);
+
+      ctx.fillStyle = COLORS.brass;
+      ctx.font = 'bold 50px "Segoe UI", sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('ROTOR', 220, 130);
+
+      ctx.fillStyle = COLORS.text;
+      ctx.font = '16px "Cascadia Code", monospace';
+      ctx.letterSpacing = '2px';
+      ctx.fillText('LOCAL CIPHER WORKBENCH', 220, 160);
+
+      ctx.fillStyle = '#38bdf8';
+      ctx.font = '14px sans-serif';
+      ctx.fillText('Strrechpixal Developers — 2026', 220, 250);
+    }
+
+    function drawMarqueeTile() {
+      const canvas = document.getElementById('marqueeTile');
+      const ctx = canvas.getContext('2d');
+      drawGrid(ctx, 1400, 560);
+
+      ctx.fillStyle = COLORS.brass;
+      ctx.font = 'bold 120px "Segoe UI", sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('ROTOR', 700, 260);
+
+      ctx.fillStyle = COLORS.text;
+      ctx.font = '32px "Cascadia Code", monospace';
+      ctx.letterSpacing = '8px';
+      ctx.fillText('ZERO-TELEMETRY CRYPTOGRAPHY', 700, 320);
+
+      ctx.fillStyle = '#38bdf8';
+      ctx.font = '24px sans-serif';
+      ctx.fillText('ENCODE • HASH • ENCRYPT • AUTO-DECODE', 700, 380);
+
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+      ctx.font = '20px sans-serif';
+      ctx.fillText('Strrechpixal Developers — 2026', 700, 520);
+    }
+
+    function generate() {
+      drawIcon();
+      drawSmallTile();
+      drawMarqueeTile();
+    }
+
+    function download(canvasId, filename) {
+      const canvas = document.getElementById(canvasId);
+      const link = document.createElement('a');
+      link.download = filename;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    }
+
+    function downloadAll() {
+      download('icon', 'icon_128x128.png');
+      download('smallTile', 'small_promo_tile_440x280.png');
+      download('marqueeTile', 'marquee_promo_tile_1400x560.png');
+    }
+
+    generate();
+  </script>
+</body>
+</html>
